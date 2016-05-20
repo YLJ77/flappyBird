@@ -65,7 +65,7 @@ function FlappyBird(){
 				bird.style.top = 267 + 'px';
 				bird.style.left = 108 + 'px';
 				self.changeHeight();
-				score_num1.style.background = 'url(flappyBird/img/0.png) no-repeat';
+				score_num1.style.background = 'url(img/0.png) no-repeat';
 				score_num2.style.background = '';
 				self.current_score = 0;
 				self.score_ones = 0;
@@ -87,10 +87,10 @@ function FlappyBird(){
 FlappyBird.prototype = {
 	bird_flying: function(obj,top_go,top_back){
 			if(obj.src == 1){
-				obj.style.backgroundImage = 'url(flappyBird/img/bird0.png)';
+				obj.style.backgroundImage = 'url(img/bird0.png)';
 				obj.src = 2;
 			} else {
-				obj.style.backgroundImage = 'url(flappyBird/img/bird1.png)';
+				obj.style.backgroundImage = 'url(img/bird1.png)';
 				obj.src = 1;
 			}
 	},
@@ -174,8 +174,8 @@ FlappyBird.prototype = {
 				game_over.style.display = 'block';
 				c_ones.src = 'img/'+this.score_ones+'.png';
 				c_decade.src = 'img/'+this.score_decade+'.png';
-				score_num1.style.background = 'url(flappyBird/img/'+this.score_decade+'.png) no-repeat';
-				score_num2.style.background = 'url(flappyBird/img/'+this.score_ones+'.png) no-repeat';
+				score_num1.style.background = 'url(img/'+this.score_decade+'.png) no-repeat';
+				score_num2.style.background = 'url(img/'+this.score_ones+'.png) no-repeat';
 				var best_score = parseInt(this.getCookie('best_score'));
 				if(best_score < this.current_score) {
 					this.setCookie('best_score',this.current_score,356);
@@ -213,14 +213,14 @@ FlappyBird.prototype = {
 				this.current_score += 1;
 				this.score_ones += 1;
 				if(this.current_score < 10) {
-					score_num1.style.background = 'url(flappyBird/img/'+(this.score_ones)+'.png) no-repeat';
+					score_num1.style.background = 'url(img/'+(this.score_ones)+'.png) no-repeat';
 				} else {
 					if(this.current_score % 10 == 0) {
 						this.score_ones = 0;
 						this.score_decade += 1;
 					}
-					score_num1.style.background = 'url(flappyBird/img/'+(this.score_decade)+'.png) no-repeat';
-					score_num2.style.background = 'url(flappyBird/img/'+(this.score_ones)+'.png) no-repeat';
+					score_num1.style.background = 'url(img/'+(this.score_decade)+'.png) no-repeat';
+					score_num2.style.background = 'url(img/'+(this.score_ones)+'.png) no-repeat';
 				}
 			}
 		}
