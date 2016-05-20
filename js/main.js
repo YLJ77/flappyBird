@@ -12,7 +12,7 @@ function FlappyBird(){
 	var pipe_down_body = document.getElementsByClassName('pipe_down_body');
 	var score_num = document.getElementById('score_num');
 	var score_num1 = document.getElementById('score_num1');
-	var score_num2 = document.getElementById('score_num2');game_over
+	var score_num2 = document.getElementById('score_num2');
 	var game_over = document.getElementById('game_over');
 	var c_ones = document.getElementById('c_ones');
 	var c_decade = document.getElementById('c_decade');
@@ -33,6 +33,7 @@ function FlappyBird(){
 	bird.finish = true;
 	start_logo.finish = true;
 
+	this.game_over = game_over;
 	this.pipe_up = pipe_up;
 	this.pipe_down = pipe_down;
 	this.pipe_up_body = pipe_up_body;
@@ -145,6 +146,7 @@ FlappyBird.prototype = {
 		var pipe_up = this.pipe_up;
 		var pipe_up_body = this.pipe_up_body;
 		var pipe_down_body = this.pipe_down_body;
+		var self = this;
 		land.style.left = land.offsetLeft - 1 + 'px';
 		if(land.offsetLeft == -(land.offsetWidth/2)){
 			land.style.left = 0 + 'px';
@@ -170,7 +172,9 @@ FlappyBird.prototype = {
 				land.className = '';
 				EventUtil.removeHandler(wrap,this.eventType,handler);
 				score_num.style.display = 'none';
-				game_over.style.display = 'block';
+				setTimeout(function(){
+					self.game_over.style.display = 'block';
+				},1000)
 				c_ones.src = 'img/'+this.score_ones+'.png';
 				c_decade.src = 'img/'+this.score_decade+'.png';
 				score_num1.style.background = 'url(img/'+this.score_decade+'.png) no-repeat';
