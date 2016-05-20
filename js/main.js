@@ -44,9 +44,8 @@ function FlappyBird(){
 
 	land.className = 'landanim';
 	if(this.getCookie('best_score') == '') {
-		alert('no cookie');
-		this.setCookie('best_score',0,365);
-	}
+	 	this.setCookie('best_score',0,365);
+	 }
 
 	var device = this.browserRedirect();
 	var eventType = (device == 'pc') ? 'click' : 'touchstart';  
@@ -177,18 +176,24 @@ FlappyBird.prototype = {
 				score_num1.style.background = 'url(img/'+this.score_decade+'.png) no-repeat';
 				score_num2.style.background = 'url(img/'+this.score_ones+'.png) no-repeat';
 				var best_score = parseInt(this.getCookie('best_score'));
-				if(best_score < this.current_score) {
-					this.setCookie('best_score',this.current_score,356);
-					b_ones.src = 'img/'+this.score_ones+'.png';
-					b_decade.src = 'img/'+this.score_decade+'.png';
+				if(best_score <= this.current_score) {
+					if(this.current_score == 0) {
+						b_ones.src = 'img/0.png';
+						b_decade.src = 'img/0.png';
+					} else {
+						this.setCookie('best_score',this.current_score,356);
+						b_ones.src = 'img/'+this.score_ones+'.png';
+						b_decade.src = 'img/'+this.score_decade+'.png';
+					}
 				} else {
 					var score = this.getCookie('best_score');
-					var ones = score.substring(1,2);
 					if(score.length > 1) {
 						var decade = score.substring(0,1);
+						var ones = score.substring(1,2);
 						b_ones.src = 'img/'+ones+'.png';
 						b_decade.src = 'img/'+decade+'.png';
 					} else {
+						var ones = score.substring(0,1);
 						b_ones.src = 'img/'+ones+'.png';
 						b_decade.src = 'img/'+this.score_decade+'.png';
 					}
