@@ -1,47 +1,47 @@
 function FlappyBird(){
-	var logo_bird = document.getElementById('logo_bird');
-	var start_logo = document.getElementById('start_logo');
-	var start = document.getElementById('start');
-	var get_ready_view = document.getElementById('get_ready_view');
-	var bird = document.getElementById('bird');
-	var wrap = document.getElementById('wrap');
-	var land = document.getElementById('land');
-	var pipe_up = document.getElementsByClassName('pipe_up');
-	var pipe_down = document.getElementsByClassName('pipe_down');
-	var pipe_up_body = document.getElementsByClassName('pipe_up_body');
-	var pipe_down_body = document.getElementsByClassName('pipe_down_body');
-	var score_num = document.getElementById('score_num');
-	var score_num1 = document.getElementById('score_num1');
-	var score_num2 = document.getElementById('score_num2');
-	var game_over = document.getElementById('game_over');
-	var c_ones = document.getElementById('c_ones');
-	var c_decade = document.getElementById('c_decade');
-	var b_ones = document.getElementById('b_ones');
-	var b_decade = document.getElementById('b_decade');
-	var medal = document.getElementById('medal');
-	var restart = document.getElementById('restart');
+	var logo_bird = document.getElementById('logo_bird'),
+	    start_logo = document.getElementById('start_logo'),
+	    start = document.getElementById('start'),
+	    get_ready_view = document.getElementById('get_ready_view'),
+	    bird = document.getElementById('bird'),
+	    wrap = document.getElementById('wrap'),
+	    land = document.getElementById('land'),
+	    pipe_up = document.getElementsByClassName('pipe_up'),
+	    pipe_down = document.getElementsByClassName('pipe_down'),
+	    pipe_up_body = document.getElementsByClassName('pipe_up_body'),
+	    pipe_down_body = document.getElementsByClassName('pipe_down_body'),
+	    score_num = document.getElementById('score_num'),
+	    score_num1 = document.getElementById('score_num1'),
+	    score_num2 = document.getElementById('score_num2'),
+	    game_over = document.getElementById('game_over'),
+	    c_ones = document.getElementById('c_ones'),
+	    c_decade = document.getElementById('c_decade'),
+	    b_ones = document.getElementById('b_ones'),
+	    b_decade = document.getElementById('b_decade'),
+	    medal = document.getElementById('medal'),
+	    restart = document.getElementById('restart'),
 
 	//media
-	var Die = document.getElementById('Die');
-	var Hit = document.getElementById('Hit');
-	var Point = document.getElementById('Point');
-	var Swooshing = document.getElementById('Swooshing');
-	var Wing = document.getElementById('Wing');
+	    Die = document.getElementById('Die'),
+	    Hit = document.getElementById('Hit'),
+	    Point = document.getElementById('Point'),
+	    Swooshing = document.getElementById('Swooshing'),
+	    Wing = document.getElementById('Wing'),
 
-	var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-	                            window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-	var cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+	    requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+	                            window.webkitRequestAnimationFrame || window.msRequestAnimationFrame,
+	    cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame,
 
 	//水管头部固定的高度
-	var pipe_head = 60;
+	    pipe_head = 60,
 	//上下两条柱的间隙高度
-	var gap = 100;
+	    gap = 100,
 	//页面剩余高度
-	var leftHeight = wrap.offsetHeight-land.offsetHeight-pipe_head*2-gap;
+	    leftHeight = wrap.offsetHeight-land.offsetHeight-pipe_head*2-gap,
 	//每条水管可生成的最大高度
-	var single_pipe_body_height = leftHeight/2;
+	    single_pipe_body_height = leftHeight/2,
 
-	var self = this;
+	    self = this;
 
 	bird.finish = true;
 	start_logo.finish = true;
@@ -125,19 +125,18 @@ FlappyBird.prototype = {
 		obj.clock = setInterval(move,300);
 	},
 	interact:function(obj_1,obj_2){
-		var between_width = Math.abs((obj_1.offsetLeft+obj_1.offsetWidth/2) - (obj_2.offsetLeft+obj_2.offsetWidth/2));
-	    var both_half_width = Math.abs((obj_1.offsetWidth+obj_2.offsetWidth)/2);
-	    var between_height = Math.abs((obj_1.offsetTop+obj_1.offsetHeight/2) - (obj_2.offsetTop+obj_2.offsetHeight/2)); 
-	    var both_half_height = Math.abs((obj_1.offsetHeight+obj_2.offsetHeight)/2);
-	    if( between_width < both_half_width && between_height < both_half_height ) return true;
-	    else return false;
+		var between_width = Math.abs((obj_1.offsetLeft+obj_1.offsetWidth/2) - (obj_2.offsetLeft+obj_2.offsetWidth/2)),
+	        both_half_width = Math.abs((obj_1.offsetWidth+obj_2.offsetWidth)/2),
+	        between_height = Math.abs((obj_1.offsetTop+obj_1.offsetHeight/2) - (obj_2.offsetTop+obj_2.offsetHeight/2)), 
+	        both_half_height = Math.abs((obj_1.offsetHeight+obj_2.offsetHeight)/2);
+	    return ( between_width < both_half_width && between_height < both_half_height ) ? true : false;
 	},
 	changeHeight:function(){
-		var left = 570;
-		var pipe_down = this.pipe_down;
-		var pipe_up = this.pipe_up;
-		var pipe_up_body = this.pipe_up_body;
-		var pipe_down_body = this.pipe_down_body;
+		var left = 570,
+		    pipe_down = this.pipe_down,
+		    pipe_up = this.pipe_up,
+		    pipe_up_body = this.pipe_up_body,
+		    pipe_down_body = this.pipe_down_body;
 		
 		for(var i=0,len = pipe_up_body.length; i<len; i++) {
 			var pipe_up_body_height = this.randomHeight(0,this.single_pipe_body_height);
@@ -152,11 +151,11 @@ FlappyBird.prototype = {
 		}
 	},
 	changeLeft:function(handler){
-		var pipe_down = this.pipe_down;
-		var pipe_up = this.pipe_up;
-		var pipe_up_body = this.pipe_up_body;
-		var pipe_down_body = this.pipe_down_body;
-		var self = this;
+		var pipe_down = this.pipe_down,
+		    pipe_up = this.pipe_up,
+		    pipe_up_body = this.pipe_up_body,
+		    pipe_down_body = this.pipe_down_body,
+		    self = this;
 		land.style.left = land.offsetLeft - 1 + 'px';
 		if(land.offsetLeft == -(land.offsetWidth/2)){
 			land.style.left = 0 + 'px';
@@ -198,10 +197,12 @@ FlappyBird.prototype = {
 					} else {
 						this.setCookie('best_score',this.current_score,356);
 						b_ones.src = 'img/'+this.score_ones+'.png';
+
 						b_decade.src = 'img/'+this.score_decade+'.png';
 					}
 				} else {
 					var score = this.getCookie('best_score');
+					if (score == '') score = '0';
 					if(score.length > 1) {
 						var decade = score.substring(0,1);
 						var ones = score.substring(1,2);
@@ -228,7 +229,7 @@ FlappyBird.prototype = {
 				break;
 			}
 			//得分
-			if(bird,pipe_up[i].offsetLeft == 108){
+			if(pipe_up[i].offsetLeft == 108){
 				Point.play();
 				this.current_score += 1;
 				this.score_ones += 1;
@@ -272,15 +273,15 @@ FlappyBird.prototype = {
 		return ""
 	},
 	browserRedirect: function(){
-		var sUserAgent = navigator.userAgent.toLowerCase();
-		var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
-		var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
-		var bIsMidp = sUserAgent.match(/midp/i) == "midp";
-		var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
-		var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
-		var bIsAndroid = sUserAgent.match(/android/i) == "android";
-		var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
-		var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+		var sUserAgent = navigator.userAgent.toLowerCase(),
+		    bIsIpad = sUserAgent.match(/ipad/i) == "ipad",
+		    bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os",
+		    bIsMidp = sUserAgent.match(/midp/i) == "midp",
+		    bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4",
+		    bIsUc = sUserAgent.match(/ucweb/i) == "ucweb",
+		    bIsAndroid = sUserAgent.match(/android/i) == "android",
+		    bIsCE = sUserAgent.match(/windows ce/i) == "windows ce",
+		    bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
 		if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
 		    return 'phone';
 		} else {
